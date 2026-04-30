@@ -1,140 +1,278 @@
-local game = {
-    done = false,
-    name = "game gemini made",
-    id = 3
-}
+local game = {done = false, name = "Custom Obby", id = 4}
 
--- Tabelas para o mapa massivo
 local platforms = {}
 local traps = {}
 
 function game.load()
-    if world == nil then
-        print("weird bug... physics world missing")
-    else
-        -- CONFIGURAÇÃO ETOH EXTREMA
-        local curX = 400
-        local curY = 500
-        
-        -- Vamos gerar 1000 obstáculos!
-        for i = 1, 1000 do
-            -- Define o tipo de obstáculo baseado no índice (estilo 'estágios')
-            local stageType = math.floor(i / 10) % 4 
-            
-            -- 1. Plataforma Base
-            local p = {
-                x = curX,
-                y = curY,
-                w = 80, -- Plataformas menores para ser difícil
-                h = 15
-            }
-            
-            -- Se for um estágio de "escada", as plataformas ficam inclinadas
-            if stageType == 1 then p.y = curY - (i % 5 * 20) end
+    if world == nil then print("physics missing") else
+        local b = {x = 220, y = 340, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
 
-            p.body = love.physics.newBody(world, p.x, p.y, "static")
-            p.shape = love.physics.newRectangleShape(p.w, p.h)
-            p.fixture = love.physics.newFixture(p.body, p.shape)
-            table.insert(platforms, p)
+        local b = {x = 260, y = 340, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
 
-            -- 2. "Kill Parts" (Neon Red no Roblox)
-            -- Truss Jumps e Head Hitters
-            if i % 2 == 0 then
-                local t = {
-                    x = curX + 100,
-                    y = curY - 40,
-                    w = 20,
-                    h = 80
-                }
-                t.body = love.physics.newBody(world, t.x, t.y, "static")
-                t.shape = love.physics.newRectangleShape(t.w, t.h)
-                t.fixture = love.physics.newFixture(t.body, t.shape)
-                t.fixture:setSensor(true)
-                table.insert(traps, t)
-            end
+        local b = {x = 300, y = 340, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
 
-            -- "Spinners" estáticos (Barras horizontais que bloqueiam o pulo)
-            if i % 5 == 0 then
-                local t = {
-                    x = curX,
-                    y = curY - 100,
-                    w = 150,
-                    h = 10
-                }
-                t.body = love.physics.newBody(world, t.x, t.y, "static")
-                t.shape = love.physics.newRectangleShape(t.w, t.h)
-                t.fixture = love.physics.newFixture(t.body, t.shape)
-                t.fixture:setSensor(true)
-                table.insert(traps, t)
-            end
+        local b = {x = 340, y = 340, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
 
-            -- Incremento de distância (O caminho para a direita)
-            curX = curX + 300
-            
-            -- Variação de altura para simular a subida da torre horizontalmente
-            curY = curY + love.math.random(-60, 60)
-            if curY < 100 then curY = 200 end
-            if curY > 500 then curY = 400 end
-        end
+        local b = {x = 420, y = 340, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
 
-        -- O Chão de Lava que nunca acaba
-        local abyss = {x = 150000, y = 650, w = 350000, h = 100}
-        abyss.body = love.physics.newBody(world, abyss.x, abyss.y, "static")
-        abyss.shape = love.physics.newRectangleShape(abyss.w, abyss.h)
-        abyss.fixture = love.physics.newFixture(abyss.body, abyss.shape)
-        abyss.fixture:setSensor(true)
-        table.insert(traps, abyss)
+        local b = {x = 380, y = 340, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 540, y = 340, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(true)
+        table.insert(traps, b)
+
+        local b = {x = 500, y = 340, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(true)
+        table.insert(traps, b)
+
+        local b = {x = 700, y = 340, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(true)
+        table.insert(traps, b)
+
+        local b = {x = 660, y = 340, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(true)
+        table.insert(traps, b)
+
+        local b = {x = 860, y = 340, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(true)
+        table.insert(traps, b)
+
+        local b = {x = 820, y = 340, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(true)
+        table.insert(traps, b)
+
+        local b = {x = 580, y = 260, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 740, y = 260, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 980, y = 60, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 980, y = 100, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 980, y = 140, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 980, y = 180, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 980, y = 220, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 980, y = 220, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 980, y = 260, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1020, y = 140, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1060, y = 140, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1100, y = 60, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1100, y = 100, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1100, y = 140, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1100, y = 180, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1100, y = 220, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1100, y = 260, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1180, y = 260, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1180, y = 220, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1180, y = 180, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1180, y = 140, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1180, y = 100, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
+        local b = {x = 1180, y = 60, w = 40, h = 40}
+        b.body = love.physics.newBody(world, b.x, b.y, "static")
+        b.shape = love.physics.newRectangleShape(b.w, b.h)
+        b.fixture = love.physics.newFixture(b.body, b.shape)
+        b.fixture:setSensor(false)
+        table.insert(platforms, b)
+
     end
 end
 
 function game.loop(dt)
-    -- Sincroniza posições
     for _, p in ipairs(platforms) do p.x, p.y = p.body:getPosition() end
-    for _, t in ipairs(traps) do 
-        t.x, t.y = t.body:getPosition() 
-        
-        -- Colisão de Dano (Padrão do seu motor)
-        if checkCollision(plrrlp.x - plrrlp.w/2, plrrlp.y - plrrlp.h/2, plrrlp.w, plrrlp.h, 
-                          t.x - t.w/2, t.y - t.h/2, t.w, t.h) then
-            if timer > 50 then
-                HurtPlayer(100) -- No ETOH encostou no vermelho, morreu (Instakill)
-                timer = 0
-            end
+    for _, t in ipairs(traps) do
+        t.x, t.y = t.body:getPosition()
+        if checkCollision(plrrlp.x-plrrlp.w/2, plrrlp.y-plrrlp.h/2, plrrlp.w, plrrlp.h, t.x-t.w/2, t.y-t.h/2, t.w, t.h) then
+            if timer > 100 then HurtPlayer(100); timer = 0 end
         end
-    end
-
-    -- Se cair muito baixo, morre também (Void)
-    if plrrlp.y > 700 then
-        HurtPlayer(100)
     end
 end
 
 function game.draw()
-    -- Desenha o percurso (Visual Minimalista)
-    for _, p in ipairs(platforms) do
-        love.graphics.setColor(1, 1, 1) -- Plataformas Brancas
-        love.graphics.rectangle("fill", p.x - p.w/2, p.y - p.h/2, p.w, p.h)
-    end
-
-    for _, t in ipairs(traps) do
-        love.graphics.setColor(1, 0, 0.2) -- Vermelho Neon
-        love.graphics.rectangle("fill", t.x - t.w/2, t.y - t.h/2, t.w, t.h)
-    end
-
-    -- Decoração Verde Fixa
-    love.graphics.setColor(0, 1, 0)
-    love.graphics.rectangle("fill", 90, 80, 100, 20)
+    love.graphics.setColor(1,1,1)
+    for _, p in ipairs(platforms) do love.graphics.rectangle("fill", p.x-p.w/2, p.y-p.h/2, p.w, p.h) end
+    love.graphics.setColor(1,0,0)
+    for _, t in ipairs(traps) do love.graphics.rectangle("fill", t.x-t.w/2, t.y-t.h/2, t.w, t.h) end
 end
 
 function game.drawui()
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.rectangle("line", 100, 1, 10, 10)
-    love.graphics.print("ETOH REPLICA | ID: " .. game.id, 120, 2)
-    
-    -- Barra de Progresso
-    local progress = math.min(100, math.floor((plrrlp.x / 300000) * 100))
-    love.graphics.print("PROGRESS: " .. progress .. "%", 120, 20)
-    love.graphics.print("POS: " .. math.floor(plrrlp.x), 120, 35)
+    love.graphics.setColor(1,1,1)
+    love.graphics.print("ID: " .. game.id, 10, 10)
 end
 
 game.done = true
