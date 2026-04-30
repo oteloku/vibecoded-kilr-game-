@@ -1,98 +1,26 @@
-local game = {done = false, name = "Unlimited Blocks", id = 0}
+local game = {done = false, name = "Respawn Game", id = 0}
+local spawnPos = { x = 460, y = 460 }
 local objects = {
-    { x = 620, y = 180, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 620, y = 180, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 980, y = 340, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 660, y = 540, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 860, y = 660, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 700, y = 460, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 460, y = 300, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 700, y = 300, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 420, y = 340, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 820, y = 300, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 1260, y = 220, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 940, y = 260, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 740, y = 460, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 500, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 380, y = 380, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 980, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 1340, y = 420, w = 100, h = 20, type = "platform", rgb = {1.00,0.50,0.00} },
-    { x = 220, y = 380, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 380, y = 700, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 340, y = 580, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 180, y = 540, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 540, y = 700, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 980, y = 740, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 1140, y = 540, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 540, y = 580, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 740, y = 380, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 1020, y = 180, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 740, y = 580, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 420, y = 580, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 1020, y = 500, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 1100, y = 420, w = 100, h = 20, type = "platform", rgb = {0.50,0.00,0.50} },
-    { x = 580, y = 340, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 860, y = 660, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 900, y = 380, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 620, y = 620, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 700, y = 340, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 660, y = 220, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 660, y = 300, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 700, y = 300, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 700, y = 260, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 780, y = 340, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 700, y = 500, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 1300, y = 780, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 1180, y = 660, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 1180, y = 300, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 660, y = 420, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 340, y = 420, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 660, y = 140, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 860, y = 260, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 940, y = 580, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 540, y = 580, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 300, y = 220, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 460, y = 60, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 740, y = 180, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 780, y = 420, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 580, y = 540, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 540, y = 460, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 1060, y = 500, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 1460, y = 380, w = 100, h = 20, type = "platform", rgb = {0.00,1.00,0.00} },
-    { x = 540, y = 420, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 580, y = 420, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 940, y = 660, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 580, y = 540, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 380, y = 580, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 1140, y = 540, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 780, y = 540, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 740, y = 580, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 1020, y = 540, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 1020, y = 220, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 740, y = 180, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 340, y = 140, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 780, y = 260, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 780, y = 420, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 700, y = 460, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 620, y = 540, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 500, y = 620, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 740, y = 580, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 900, y = 580, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 820, y = 580, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 700, y = 540, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 940, y = 420, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 860, y = 500, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 540, y = 660, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 460, y = 740, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 300, y = 620, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 260, y = 500, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 260, y = 380, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 380, y = 260, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
-    { x = 460, y = 180, w = 100, h = 20, type = "platform", rgb = {0.00,0.50,0.75} },
+    { x = 460, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,1.00,1.00} },
+    { x = 540, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,1.00,1.00} },
+    { x = 660, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,1.00,1.00} },
+    { x = 620, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,1.00,1.00} },
+    { x = 780, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,1.00,1.00} },
+    { x = 740, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,1.00,1.00} },
+    { x = 860, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,1.00,1.00} },
+    { x = 940, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,1.00,1.00} },
+    { x = 1020, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,1.00,1.00} },
+    { x = 1100, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,1.00,1.00} },
+    { x = 1060, y = 500, w = 100, h = 20, type = "trap", rgb = {1.00,1.00,1.00} },
+    { x = 980, y = 500, w = 100, h = 20, type = "trap", rgb = {1.00,1.00,1.00} },
+    { x = 900, y = 500, w = 100, h = 20, type = "trap", rgb = {1.00,1.00,1.00} },
+    { x = 900, y = 500, w = 100, h = 20, type = "trap", rgb = {1.00,1.00,1.00} },
 }
 
 function game.load()
     if world == nil then return end
+    -- Teleport player to spawn on start
+    if plrrlp then plrrlp.body:setPosition(spawnPos.x, spawnPos.y) end
     for _, obj in ipairs(objects) do
         obj.body = love.physics.newBody(world, obj.x, obj.y, "static")
         obj.shape = love.physics.newRectangleShape(obj.w, obj.h)
@@ -102,6 +30,13 @@ function game.load()
 end
 
 function game.loop(dt)
+    -- Death / Respawn Logic
+    if plrrlp.hp <= 0 then
+        plrrlp.hp = 100 -- Reset HP
+        plrrlp.body:setPosition(spawnPos.x, spawnPos.y)
+        plrrlp.body:setLinearVelocity(0, 0) -- Stop momentum
+    end
+
     for _, obj in ipairs(objects) do
         obj.x, obj.y = obj.body:getPosition()
         if obj.type == "trap" then
