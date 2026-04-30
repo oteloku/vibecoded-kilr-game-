@@ -1,6 +1,6 @@
 local game = {
     done = false,
-    name = "ETOH: Escape The Oh No (Roblox Style)",
+    name = "game gemini made",
     id = 3
 }
 
