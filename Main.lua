@@ -1,4 +1,4 @@
-local game = {done = false, name = "my vibecoded killr creator game", id = 0}
+local game = {done = false, name = "my vibecoded killr creator game", id = 5}
 
 local obj0 = { x = 260, y = 540, w = 40, h = 40, type = "platform", rgb = {0.15,0.58,0.00} }
 local obj1 = { x = 260, y = 580, w = 40, h = 40, type = "platform", rgb = {0.15,0.58,0.00} }
