@@ -1,4 +1,4 @@
-local game = {done = false, name = "Respawn Game", id = 0}
+local game = {done = false, name = "Respawn Game", id = 5}
 local spawnPos = { x = 460, y = 460 }
 local objects = {
     { x = 460, y = 500, w = 100, h = 20, type = "platform", rgb = {1.00,1.00,1.00} },
